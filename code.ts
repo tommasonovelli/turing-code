@@ -10,6 +10,7 @@ starting_point * * l starting_point
 starting_point _ _ r 0a
 
 0a * * r 0a
+0a 0 r r w0
 0a 1 r r w1 
 0a 2 r r w2
 0a 3 r r w3
@@ -47,6 +48,13 @@ check 9 * l cb
 end * * r end
 end _ _ l end1
 end1 , } * halt
+
+;write-0 state
+w0 * * r w0
+w0 0 r r w0
+w0 _ _ * w0a
+w0a _ 0 r w0b
+w0b _ , l cb
 
 ;write-1 state
 w1 * * r w1
