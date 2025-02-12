@@ -35,7 +35,7 @@ opType D * r d
 
 
 ; ---------------------------- 
-;     Funzione di inizio       
+;      Funzione di fine       
 ; ---------------------------- 
 
 ; andiamo a definire la funzione di terminazione direttamente
@@ -45,10 +45,12 @@ opType D * r d
 ; andiamo a chiudere l'insieme di output
 
 end * * r end
-end _ _ l end1
-end1 , } * halt
-end1 { * r end2
-end2 _ } * halt
+end _ _ l end_a
+end_a , } r end_smile
+end_a { * r end_b
+end_b _ } r end_smile
+
+end_smile _ ツ r halt
 
 
 
@@ -151,10 +153,10 @@ uRead4 * * r uRead4
 uRead4 4 r r uRead4
 uRead4 _ 4 r uWritten
 
-; uRead4 function
-uRead4 * * r uRead4
-uRead4 4 r r uRead4
-uRead4 _ 4 r uWritten
+; uRead5 function
+uRead5 * * r uRead5
+uRead5 5 r r uRead5
+uRead5 _ 5 r uWritten
 
 ; uRead6 function
 uRead6 * * r uRead6
