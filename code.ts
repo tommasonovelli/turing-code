@@ -487,49 +487,7 @@ d0 6 * r dRead6
 d0 7 * r dRead7
 d0 8 * r dRead8
 d0 9 * r dRead9
-
-
-; definiamo una funzione di ritorno al primo valore del primo 
-; insieme (coming back function), inseriamo anche una funzione
-; di controllo spiegata sotto (check function)
-
-dCb * * l dCb
-dCb { * l dCheck
-dCb _ _ r d0
-
-
-; in fase di ritorno dall'insieme di output voglio verificare che  
-; tutti i numeri nei due insiemi siano stati letti così da poter 
-; definire conclusa l'operazione svolta dal programma
-
-; andiamo a scorrere verso sinistra fino a trovare il prossimo
-; spazio vuoto (_), se non incontriamo numeri andiamo a concludere
-; il programma con la funzione di ending
-
-dCheck D * l dCheck
-dCheck ] * l dCheck
-dCheck r * l dCheck
-dCheck , * l dCheck
-dCheck [ * l dCheck
-dCheck _ * r end 
-
-
-; se invece incontriamo numeri vuol dire che dobbiamo ripetere 
-; ancora almeno una volta l'operazione di unione poiché il 
-; programma non avrà ancora inserito tutti i valori nell'output
-
-; quindi ritorniamo nella coming back function
-
-dCheck 0 * l dCb
-dCheck 1 * l dCb
-dCheck 2 * l dCb
-dCheck 3 * l dCb
-dCheck 4 * l dCb
-dCheck 5 * l dCb
-dCheck 6 * l dCb
-dCheck 7 * l dCb
-dCheck 8 * l dCb
-dCheck 9 * l dCb
+d0 { * r end
 
 
 ; andiamo a definire tutte le operazioni necessarie qualora 
@@ -537,7 +495,7 @@ dCheck 9 * l dCb
 ; secondo
 
 ; la funzione una volta letto e identificato il numero lo sostituisce
-; (es. iRead0 --> 0 numero/valore identificativo della funzione)
+; (es. dRead0 --> 0 numero/valore identificativo della funzione)
 ; con una r (read: letto), scorre fino a raggiungere la prima 
 ; posizione libera nell'insieme di output e lo aggiunge seguito da
 ; una virgola per separare i valori
@@ -564,6 +522,213 @@ dRead0_writeResult _ 0 r dRead0_writeResult_a
 dRead0_writeResult_a _ , l dRead0_writeResult_b
 dRead0_writeResult_b * * l dRead0_writeResult_b
 dRead0_writeResult_b { * l dRead0_del
+
+
+; dRead1 function
+dRead1 * * r dRead1
+dRead1 [ * r dRead1_checkCouple
+
+dRead1_checkCouple * * r dRead1_checkCouple    
+dRead1_checkCouple { * r dRead1_writeResult    
+dRead1_checkCouple 1 r r dRead1_checked   
+
+dRead1_checked * * r dRead1_checked
+dRead1_checked 1 r r dRead1_checked
+dRead1_checked ] * r dRead1_del
+
+dRead1_del 1 r l dRead1_del
+dRead1_del * * l dRead1_del
+dRead1_del _ * r d0 
+
+dRead1_writeResult * * r dRead1_writeResult
+dRead1_writeResult _ 1 r dRead1_writeResult_a
+dRead1_writeResult_a _ , l dRead1_writeResult_b
+dRead1_writeResult_b * * l dRead1_writeResult_b
+dRead1_writeResult_b { * l dRead1_del
+
+
+; dRead2 function
+dRead2 * * r dRead2
+dRead2 [ * r dRead2_checkCouple
+
+dRead2_checkCouple * * r dRead2_checkCouple    
+dRead2_checkCouple { * r dRead2_writeResult    
+dRead2_checkCouple 2 r r dRead2_checked   
+
+dRead2_checked * * r dRead2_checked
+dRead2_checked 2 r r dRead2_checked
+dRead2_checked ] * r dRead2_del
+
+dRead2_del 2 r l dRead2_del
+dRead2_del * * l dRead2_del
+dRead2_del _ * r d0 
+
+dRead2_writeResult * * r dRead2_writeResult
+dRead2_writeResult _ 2 r dRead2_writeResult_a
+dRead2_writeResult_a _ , l dRead2_writeResult_b
+dRead2_writeResult_b * * l dRead2_writeResult_b
+dRead2_writeResult_b { * l dRead2_del
+
+
+; dRead3 function
+dRead3 * * r dRead3
+dRead3 [ * r dRead3_checkCouple
+
+dRead3_checkCouple * * r dRead3_checkCouple    
+dRead3_checkCouple { * r dRead3_writeResult    
+dRead3_checkCouple 3 r r dRead3_checked   
+
+dRead3_checked * * r dRead3_checked
+dRead3_checked 3 r r dRead3_checked
+dRead3_checked ] * r dRead3_del
+
+dRead3_del 3 r l dRead3_del
+dRead3_del * * l dRead3_del
+dRead3_del _ * r d0 
+
+dRead3_writeResult * * r dRead3_writeResult
+dRead3_writeResult _ 3 r dRead3_writeResult_a
+dRead3_writeResult_a _ , l dRead3_writeResult_b
+dRead3_writeResult_b * * l dRead3_writeResult_b
+dRead3_writeResult_b { * l dRead3_del
+
+
+; dRead4 function
+dRead4 * * r dRead4
+dRead4 [ * r dRead4_checkCouple
+
+dRead4_checkCouple * * r dRead4_checkCouple    
+dRead4_checkCouple { * r dRead4_writeResult    
+dRead4_checkCouple 4 r r dRead4_checked   
+
+dRead4_checked * * r dRead4_checked
+dRead4_checked 4 r r dRead4_checked
+dRead4_checked ] * r dRead4_del
+
+dRead4_del 4 r l dRead4_del
+dRead4_del * * l dRead4_del
+dRead4_del _ * r d0
+
+dRead4_writeResult * * r dRead4_writeResult
+dRead4_writeResult _ 4 r dRead4_writeResult_a
+dRead4_writeResult_a _ , l dRead4_writeResult_b
+dRead4_writeResult_b * * l dRead4_writeResult_b
+dRead4_writeResult_b { * l dRead4_del
+
+
+; dRead5 function
+dRead5 * * r dRead5
+dRead5 [ * r dRead5_checkCouple
+
+dRead5_checkCouple * * r dRead5_checkCouple    
+dRead5_checkCouple { * r dRead5_writeResult    
+dRead5_checkCouple 5 r r dRead5_checked   
+
+dRead5_checked * * r dRead5_checked
+dRead5_checked 5 r r dRead5_checked
+dRead5_checked ] * r dRead5_del
+
+dRead5_del 5 r l dRead5_del
+dRead5_del * * l dRead5_del
+dRead5_del _ * r d0 
+
+dRead5_writeResult * * r dRead5_writeResult
+dRead5_writeResult _ 5 r dRead5_writeResult_a
+dRead5_writeResult_a _ , l dRead5_writeResult_b
+dRead5_writeResult_b * * l dRead5_writeResult_b
+dRead5_writeResult_b { * l dRead5_del
+
+
+; dRead6 function
+dRead6 * * r dRead6
+dRead6 [ * r dRead6_checkCouple
+
+dRead6_checkCouple * * r dRead6_checkCouple    
+dRead6_checkCouple { * r dRead6_writeResult    
+dRead6_checkCouple 6 r r dRead6_checked   
+
+dRead6_checked * * r dRead6_checked
+dRead6_checked 6 r r dRead6_checked
+dRead6_checked ] * r dRead6_del
+
+dRead6_del 6 r l dRead6_del
+dRead6_del * * l dRead6_del
+dRead6_del _ * r d0 
+
+dRead6_writeResult * * r dRead6_writeResult
+dRead6_writeResult _ 6 r dRead6_writeResult_a
+dRead6_writeResult_a _ , l dRead6_writeResult_b
+dRead6_writeResult_b * * l dRead6_writeResult_b
+dRead6_writeResult_b { * l dRead6_del
+
+
+; dRead7 function
+dRead7 * * r dRead7
+dRead7 [ * r dRead7_checkCouple
+
+dRead7_checkCouple * * r dRead7_checkCouple    
+dRead7_checkCouple { * r dRead7_writeResult    
+dRead7_checkCouple 7 r r dRead7_checked   
+
+dRead7_checked * * r dRead7_checked
+dRead7_checked 7 r r dRead7_checked
+dRead7_checked ] * r dRead7_del
+
+dRead7_del 7 r l dRead7_del
+dRead7_del * * l dRead7_del
+dRead7_del _ * r d0 
+
+dRead7_writeResult * * r dRead7_writeResult
+dRead7_writeResult _ 7 r dRead7_writeResult_a
+dRead7_writeResult_a _ , l dRead7_writeResult_b
+dRead7_writeResult_b * * l dRead7_writeResult_b
+dRead7_writeResult_b { * l dRead7_del
+
+
+; dRead8 function
+dRead8 * * r dRead8
+dRead8 [ * r dRead8_checkCouple
+
+dRead8_checkCouple * * r dRead8_checkCouple    
+dRead8_checkCouple { * r dRead8_writeResult    
+dRead8_checkCouple 8 r r dRead8_checked   
+
+dRead8_checked * * r dRead8_checked
+dRead8_checked 8 r r dRead8_checked
+dRead8_checked ] * r dRead8_del
+
+dRead8_del 8 r l dRead8_del
+dRead8_del * * l dRead8_del
+dRead8_del _ * r d0 
+
+dRead8_writeResult * * r dRead8_writeResult
+dRead8_writeResult _ 8 r dRead8_writeResult_a
+dRead8_writeResult_a _ , l dRead8_writeResult_b
+dRead8_writeResult_b * * l dRead8_writeResult_b
+dRead8_writeResult_b { * l dRead8_del
+
+
+; dRead9 function
+dRead9 * * r dRead9
+dRead9 [ * r dRead9_checkCouple
+
+dRead9_checkCouple * * r dRead9_checkCouple    
+dRead9_checkCouple { * r dRead9_writeResult    
+dRead9_checkCouple 9 r r dRead9_checked   
+
+dRead9_checked * * r dRead9_checked
+dRead9_checked 9 r r dRead9_checked
+dRead9_checked ] * r dRead9_del
+
+dRead9_del 9 r l dRead9_del
+dRead9_del * * l dRead9_del
+dRead9_del _ * r d0 
+
+dRead9_writeResult * * r dRead9_writeResult
+dRead9_writeResult _ 9 r dRead9_writeResult_a
+dRead9_writeResult_a _ , l dRead9_writeResult_b
+dRead9_writeResult_b * * l dRead9_writeResult_b
+dRead9_writeResult_b { * l dRead9_del
 
 
 * Fine codice
