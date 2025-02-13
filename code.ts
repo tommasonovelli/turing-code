@@ -30,7 +30,7 @@ start _ _ r opType
 
 opType U * r u0     ; stato iniziale unione u0
 opType I * r i0     ; stato iniziale intersezione i0
-opType D * r d
+opType D * r d0     ; stato iniziale differenza d0
 
 
 
@@ -107,6 +107,7 @@ uCheck _ * r end
 
 ; quindi ritorniamo nella coming back function
 
+uCheck 0 * l uCb
 uCheck 1 * l uCb
 uCheck 2 * l uCb
 uCheck 3 * l uCb
@@ -237,6 +238,7 @@ iCheck _ * r end
 
 ; quindi ritorniamo nella coming back function
 
+iCheck 0 * l iCb
 iCheck 1 * l iCb
 iCheck 2 * l iCb
 iCheck 3 * l iCb
@@ -462,6 +464,107 @@ iRead9_checked _ 9 r iWritten
 ; (written function) una volta scritto il valore aggiungo la virgola dopo
 ; di esso e tornando allo stato iniziale usando iCb
 iWritten _ , l iCb    
+
+
+
+; ---------------------------- 
+;         Differenza      
+; ---------------------------- 
+
+; N.B. tutti gli stati dell'unione avranno prefisso d, almeno uno 
+; dei due insiemi deve contentere un valore.
+; andiamo a definire uno stato iniziale per l'unione dove poi
+; andremo ad eseguire i relativi stati in base al numero letto
+
+d0 * * r d0
+d0 0 * r dRead0
+d0 1 * r dRead1
+d0 2 * r dRead2
+d0 3 * r dRead3
+d0 4 * r dRead4
+d0 5 * r dRead5
+d0 6 * r dRead6
+d0 7 * r dRead7
+d0 8 * r dRead8
+d0 9 * r dRead9
+
+
+; definiamo una funzione di ritorno al primo valore del primo 
+; insieme (coming back function), inseriamo anche una funzione
+; di controllo spiegata sotto (check function)
+
+dCb * * l dCb
+dCb { * l dCheck
+dCb _ _ r d0
+
+
+; in fase di ritorno dall'insieme di output voglio verificare che  
+; tutti i numeri nei due insiemi siano stati letti così da poter 
+; definire conclusa l'operazione svolta dal programma
+
+; andiamo a scorrere verso sinistra fino a trovare il prossimo
+; spazio vuoto (_), se non incontriamo numeri andiamo a concludere
+; il programma con la funzione di ending
+
+dCheck D * l dCheck
+dCheck ] * l dCheck
+dCheck r * l dCheck
+dCheck , * l dCheck
+dCheck [ * l dCheck
+dCheck _ * r end 
+
+
+; se invece incontriamo numeri vuol dire che dobbiamo ripetere 
+; ancora almeno una volta l'operazione di unione poiché il 
+; programma non avrà ancora inserito tutti i valori nell'output
+
+; quindi ritorniamo nella coming back function
+
+dCheck 0 * l dCb
+dCheck 1 * l dCb
+dCheck 2 * l dCb
+dCheck 3 * l dCb
+dCheck 4 * l dCb
+dCheck 5 * l dCb
+dCheck 6 * l dCb
+dCheck 7 * l dCb
+dCheck 8 * l dCb
+dCheck 9 * l dCb
+
+
+; andiamo a definire tutte le operazioni necessarie qualora 
+; incontrassimo un numero decimale (0-9) nel primo insieme o nel
+; secondo
+
+; la funzione una volta letto e identificato il numero lo sostituisce
+; (es. iRead0 --> 0 numero/valore identificativo della funzione)
+; con una r (read: letto), scorre fino a raggiungere la prima 
+; posizione libera nell'insieme di output e lo aggiunge seguito da
+; una virgola per separare i valori
+
+
+; dRead0 function
+dRead0 * * r dRead0
+dRead0 [ * r dRead0_checkCouple
+
+dRead0_checkCouple * * r dRead0_checkCouple    
+dRead0_checkCouple { * r dRead0_writeResult    
+dRead0_checkCouple 0 r r dRead0_checked   
+
+dRead0_checked * * r dRead0_checked
+dRead0_checked 0 r r dRead0_checked
+dRead0_checked ] * r dRead0_del
+
+dRead0_del 0 r l dRead0_del
+dRead0_del * * l dRead0_del
+dRead0_del _ * r d0 
+
+dRead0_writeResult * * r dRead0_writeResult
+dRead0_writeResult _ 0 r dRead0_writeResult_a
+dRead0_writeResult_a _ , l dRead0_writeResult_b
+dRead0_writeResult_b * * l dRead0_writeResult_b
+dRead0_writeResult_b { * l dRead0_del
+
 
 * Fine codice
 
