@@ -14,7 +14,7 @@ Output: {1,2,3}
 ; andiamo ad aggiungere alla fine una parentesi grafa dove
 ; poi inseriremo i valori dell'insieme di output
 0 * * r 0
-0 _ { * start --> (start, {, r)
+0 _ { * start
 
 
 ; torno all'inizio dell'input per cominciare ad effettuare
