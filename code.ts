@@ -14,7 +14,7 @@ Output: {1,2,3}
 ; andiamo ad aggiungere alla fine una parentesi grafa dove
 ; poi inseriremo i valori dell'insieme di output
 0 * * r 0
-0 _ { * start
+0 _ { * start --> (start, {, r)
 
 
 ; torno all'inizio dell'input per cominciare ad effettuare
@@ -503,6 +503,7 @@ d0 { * r end
 
 ; dRead0 function
 dRead0 * * r dRead0
+dRead0 { * l dRead0_del
 dRead0 [ * r dRead0_checkCouple
 
 dRead0_checkCouple * * r dRead0_checkCouple    
@@ -526,6 +527,7 @@ dRead0_writeResult_b { * l dRead0_del
 
 ; dRead1 function
 dRead1 * * r dRead1
+dRead1 { * l dRead1_del
 dRead1 [ * r dRead1_checkCouple
 
 dRead1_checkCouple * * r dRead1_checkCouple    
@@ -549,6 +551,7 @@ dRead1_writeResult_b { * l dRead1_del
 
 ; dRead2 function
 dRead2 * * r dRead2
+dRead2 { * l dRead2_del
 dRead2 [ * r dRead2_checkCouple
 
 dRead2_checkCouple * * r dRead2_checkCouple    
@@ -572,6 +575,7 @@ dRead2_writeResult_b { * l dRead2_del
 
 ; dRead3 function
 dRead3 * * r dRead3
+dRead3 { * l dRead3_del
 dRead3 [ * r dRead3_checkCouple
 
 dRead3_checkCouple * * r dRead3_checkCouple    
@@ -595,6 +599,7 @@ dRead3_writeResult_b { * l dRead3_del
 
 ; dRead4 function
 dRead4 * * r dRead4
+dRead4 { * l dRead4_del
 dRead4 [ * r dRead4_checkCouple
 
 dRead4_checkCouple * * r dRead4_checkCouple    
@@ -618,6 +623,7 @@ dRead4_writeResult_b { * l dRead4_del
 
 ; dRead5 function
 dRead5 * * r dRead5
+dRead5 { * l dRead5_del
 dRead5 [ * r dRead5_checkCouple
 
 dRead5_checkCouple * * r dRead5_checkCouple    
@@ -641,6 +647,7 @@ dRead5_writeResult_b { * l dRead5_del
 
 ; dRead6 function
 dRead6 * * r dRead6
+dRead6 { * l dRead6_del
 dRead6 [ * r dRead6_checkCouple
 
 dRead6_checkCouple * * r dRead6_checkCouple    
@@ -664,6 +671,7 @@ dRead6_writeResult_b { * l dRead6_del
 
 ; dRead7 function
 dRead7 * * r dRead7
+dRead7 { * l dRead7_del
 dRead7 [ * r dRead7_checkCouple
 
 dRead7_checkCouple * * r dRead7_checkCouple    
@@ -687,6 +695,7 @@ dRead7_writeResult_b { * l dRead7_del
 
 ; dRead8 function
 dRead8 * * r dRead8
+dRead8 { * l dRead8_del
 dRead8 [ * r dRead8_checkCouple
 
 dRead8_checkCouple * * r dRead8_checkCouple    
@@ -710,6 +719,7 @@ dRead8_writeResult_b { * l dRead8_del
 
 ; dRead9 function
 dRead9 * * r dRead9
+dRead9 { * l dRead9_del
 dRead9 [ * r dRead9_checkCouple
 
 dRead9_checkCouple * * r dRead9_checkCouple    
