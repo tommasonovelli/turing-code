@@ -11,7 +11,7 @@ Output: {1,2,3}
 ;     Funzione di inizio       
 ; ---------------------------- 
 
-; andiamo ad aggiungere alla fine una parentesi grafa dove
+; andiamo ad aggiungere alla fine una parentesi graffa dove
 ; poi inseriremo i valori dell'insieme di output
 0 * * r 0
 0 _ { * start
@@ -59,7 +59,7 @@ end_smile _ ツ r halt
 ; ---------------------------- 
 
 ; N.B. tutti gli stati dell'unione avranno prefisso u, almeno uno 
-; dei due insiemi deve contentere un valore.
+; dei due insiemi deve contenere un valore.
 ; andiamo a definire uno stato iniziale per l'unione dove poi
 ; andremo ad eseguire i relativi stati in base al numero letto
 
@@ -190,7 +190,7 @@ uWritten _ , l uCb
 ; ---------------------------- 
 
 ; N.B. tutti gli stati dell'unione avranno prefisso i, almeno uno 
-; dei due insiemi deve contentere un valore.
+; dei due insiemi deve contenere un valore.
 ; andiamo a definire uno stato iniziale per l'unione dove poi
 ; andremo ad eseguire i relativi stati in base al numero letto
 
@@ -472,7 +472,7 @@ iWritten _ , l iCb
 ; ---------------------------- 
 
 ; N.B. tutti gli stati dell'unione avranno prefisso d, almeno uno 
-; dei due insiemi deve contentere un valore.
+; dei due insiemi deve contenere un valore.
 ; andiamo a definire uno stato iniziale per l'unione dove poi
 ; andremo ad eseguire i relativi stati in base al numero letto
 
@@ -502,27 +502,28 @@ d0 { * r end
 
 
 ; dRead0 function
-dRead0 * * r dRead0
-dRead0 { * l dRead0_del
-dRead0 [ * r dRead0_checkCouple
+dRead0 * * r dRead0                         ; scorro il nastro
+dRead0 { * l dRead0_del                     ; se incontro il { torno a capo cancellando tutti i valori identificativi
+dRead0 [ * r dRead0_checkCouple             ; verifico che il numero sia presente nel secondo insieme
 
-dRead0_checkCouple * * r dRead0_checkCouple    
-dRead0_checkCouple { * r dRead0_writeResult    
-dRead0_checkCouple 0 r r dRead0_checked   
+dRead0_checkCouple * * r dRead0_checkCouple    ; verifico che il valore sia nel secondo insieme
+dRead0_checkCouple { * r dRead0_writeResult    ; quando raggiungo la { posso andare a concludere l'operazione scrivendo il risultato nell'output
+dRead0_checkCouple 0 r r dRead0_checked        ; ci sono utleriori altri valori li vado a sostituire con r
 
-dRead0_checked * * r dRead0_checked
-dRead0_checked 0 r r dRead0_checked
-dRead0_checked ] * r dRead0_del
+dRead0_checked * * r dRead0_checked         ; in queste tre righe controllo dove finisce il secondo insieme
+dRead0_checked 0 r r dRead0_checked         ; poichè abbiamo trovato il valore identificativo nel secondo insieme 
+dRead0_checked ] * r dRead0_del             ; cancello il valore anche nel primo insieme
 
-dRead0_del 0 r l dRead0_del
-dRead0_del * * l dRead0_del
-dRead0_del _ * r d0 
+dRead0_del 0 r l dRead0_del     ; cancello tutti i valori identificativi della funzione spostandomi
+dRead0_del * * l dRead0_del     ; a sinistra per evitare di ripetere l'operazione con lo stesso numero
+dRead0_del _ * r d0             ; una volta finita questa operazione di sostituzione torno allo stato iniziale d0 per continuare la differenza
 
-dRead0_writeResult * * r dRead0_writeResult
-dRead0_writeResult _ 0 r dRead0_writeResult_a
-dRead0_writeResult_a _ , l dRead0_writeResult_b
+dRead0_writeResult * * r dRead0_writeResult         ; qualora non trovassi il valore identificativo nel secondo insieme
+dRead0_writeResult _ 0 r dRead0_writeResult_a       ; a questo punto posso andare a riportare il valore nell'insieme output
+dRead0_writeResult_a _ , l dRead0_writeResult_b     ; mi sposto a sinistra fino a trovare il primo spazio disponibile
 dRead0_writeResult_b * * l dRead0_writeResult_b
-dRead0_writeResult_b { * l dRead0_del
+dRead0_writeResult_b { * l dRead0_del               ; una volta scritto il valore, torno indietro per far partire l'operazione di eliminazione dei valori ripetenti
+                                                    ; per evitare di ripetere inutilmente questo blocco di istruzioni
 
 
 ; dRead1 function
