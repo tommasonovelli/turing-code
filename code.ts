@@ -74,6 +74,7 @@ u0 6 r r uRead6
 u0 7 r r uRead7
 u0 8 r r uRead8
 u0 9 r r uRead9
+u0 { * * uCb
 
 
 ; definiamo una funzione di ritorno al primo valore del primo 
@@ -205,6 +206,7 @@ i0 6 r r iRead6
 i0 7 r r iRead7
 i0 8 r r iRead8
 i0 9 r r iRead9
+i0 { * * iCb
 
 
 ; definiamo una funzione di ritorno al primo valore del primo 
